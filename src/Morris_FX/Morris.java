@@ -55,7 +55,7 @@ public class Morris extends Application {
         HBox choices = new HBox();
         choices.getChildren().addAll(again, openMenu, exit);
 
-//setting images
+//importing images!
         Image woodBoard = new Image(new FileInputStream("./images/Morris_Board_Wood.png"),550,550,false,true);
         Image blackMarble = new Image(new FileInputStream("./images/BlackMarble.png"), 40,40,false,true);
         Image whiteMarble = new Image(new FileInputStream("./images/WhiteMarble.png"), 40,40,false,true);
@@ -63,7 +63,7 @@ public class Morris extends Application {
         BackgroundImage blackPiece = new BackgroundImage(blackMarble,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         BackgroundImage whitePiece = new BackgroundImage(whiteMarble,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 
-
+//set a new gameManager
         GameManager manager = new GameManager(false,whitePiece,blackPiece);
         manager.enableDebug();
         manager.CreateNewBoard();

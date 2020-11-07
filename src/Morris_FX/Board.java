@@ -9,6 +9,8 @@ public class Board {
     public Morris.State playState = Morris.State.VOID;
 
     private GameManager owner;
+
+    //create a new board, iterate over a 7x7 board and add a cell in each spot with a point value too
     public Board(GameManager owner){
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -20,6 +22,7 @@ public class Board {
     public GridPane toGridPane(){
         return toGridPane(550,550,Pos.CENTER);
     }
+    //put the board in a gridpane, overload if we don't want to give specific variables
 
     public GridPane toGridPane(int height, int width,Pos loc){
         GridPane retval = new GridPane();
@@ -34,7 +37,9 @@ public class Board {
         return retval;
     }
 
-
+    //resets the board, the top and bottom 3 rows can be called in a single for loop
+    //the second for loop deals with the middle row with 6 places
+    //then set the playState to empty and remove the background
     public void resetBoard() {
         int p = 6;
         for (int t = 0; t < 3; t++) {
@@ -60,6 +65,9 @@ public class Board {
                     board[i][j].setBackground(null);
     }
 
+    //take the location of a given cell. Going right takes the x value from point and checks the spots to the right
+    //if it goes out of bounds or hits the middle of the board, return null
+    //if it goes right and finds an empty cell, return that cell to be linked to the cell we gave the function
     Cell findRight(Point location){
         int i = location.x + 1;
         int j = location.y;
@@ -75,6 +83,7 @@ public class Board {
         return null;
     }
 
+    //same but left
     Cell findLeft(Point location){
         int i = location.x - 1;
         int j = location.y;
@@ -90,6 +99,7 @@ public class Board {
         return null;
     }
 
+    //same but down
     Cell findDown(Point location){
         int i = location.x;
         int j = location.y + 1;
@@ -105,6 +115,7 @@ public class Board {
         return null;
     }
 
+    //same but up
     Cell findUp(Point location){
         int i = location.x;
         int j = location.y - 1;
@@ -120,6 +131,10 @@ public class Board {
         return null;
     }
 
+    //takes all the find functions and iterates over the entire board
+    //for each playable cell make a pointer to the cell up, right, down, and left of that cell
+    //also add that linked cell to the list of playable cells for each cell
+    //this list is used to check to find a place to move
     public void linkCells(){
         for(int j = 0; j < 7; j++) {
             for (int i = 0; i < 7; i++) {

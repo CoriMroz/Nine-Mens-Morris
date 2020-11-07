@@ -28,17 +28,22 @@ public class Cell extends Pane {
         this.setOnMouseClicked(e -> handleMouseClick());
     }
 
+    //sets cell state to empty and removes marble image
     public void EmptyCell(){
         this.playState = Morris.State.EMPTY;
         this.setBackground(null);
     }
 
+    //returns a cell's Point(x, y) value
     public Point getPoint(){
         return location;
     }
 
+    //this function can be cleaned up a bit
+    //has stages for each stage. Stage 3 has yet to be implemented
+    //Code flips game state in owner, owner controls gameState
+
     public void handleMouseClick() {
-        //Code flips game state in owner, owner controls gamestate.
         //mill starts as false, if there is a mill it flips to true, owner can remove a piece
         if(owner.mill) {
             owner.removeOpponent(this);
@@ -49,10 +54,11 @@ public class Cell extends Pane {
 
         switch (owner.getCurrentStage()) {
             case STAGE1:
-                //Place checks if your click is on a valid cell
+                //Place checks if your click is on a valid cell then set proper background  and playState of cell
                 if (owner.Place(this)) {
                     this.setBackground(new Background(owner.getCurrentPlayer().myMarble));
                     this.playState = owner.getCurrentPlayer().myState;
+                    //check for Mill. If so, set to true and break to beginning without changing turn
                     if(owner.checker.millCheck(this)){
                         owner.mill = true;
                         System.out.println("Mill!");
@@ -62,12 +68,14 @@ public class Cell extends Pane {
                 }
                 break;
             case STAGE2:
-                //if y
+                //owner.Place checks if the user has just picked up a marble, then validMove checks for valid moves
+                //if so, set the proper background and playState of the cell
                 if(owner.Place(this)) {
                     if (owner.validMove(this)){
                         this.setBackground(new Background(owner.getCurrentPlayer().myMarble));
                         this.playState = owner.getCurrentPlayer().myState;
                         owner.getCurrentPlayer().resetMarble();
+                        //check for mill on placed piece
                         if(owner.checker.millCheck(this)){
                             owner.mill = true;
                             System.out.println("Mill!");
@@ -76,6 +84,8 @@ public class Cell extends Pane {
                         owner.switchTurn();
                     }
                 }else{
+                    //if the current Player has not picked up a marble, check if the marble they clicked on can be picked up
+                    //if so, hold the playState of that cell in holdMarble and empty the cell where the marble was and break
                     if (owner.canPickup(this)) {
                         owner.holdMarble(this);
                         this.EmptyCell();

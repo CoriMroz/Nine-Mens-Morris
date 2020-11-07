@@ -95,11 +95,12 @@ public class GameManager {
     }
 
     //this is called in HandleMouseClick to switch to stage 2
+    //checks to see if each person has marbles to place still
     public boolean eitherPlayerHasMarbles(){
         return player1.remainingMarbles() || player2.remainingMarbles();
     }
 
-
+    //gets the current player
     public Player getCurrentPlayer(){
         if(turn){
             return player1;
@@ -107,6 +108,7 @@ public class GameManager {
         return player2;
     }
 
+    //gets next player
     public Player getNextPlayer(){
         if(turn){
             return player2;
@@ -114,18 +116,25 @@ public class GameManager {
         return player1;
     }
 
+    //calls holdMarble from Player class to keep the cell information in memory
     public void holdMarble(Cell cell){
         getCurrentPlayer().holdMarble(cell);
     }
 
+    //calls validMove function from LogicChecker
     public boolean validMove(Cell cell){
         return checker.validMove(cell);
     }
 
+    //calls canPickup function in LogicChecker
     public boolean canPickup(Cell cell){
         return checker.canPickup(cell, getCurrentPlayer());
     }
 
+    //first check to see if you are clicking on a marble with the same playState (BLACK, WHITE) as the other player (getNextPlayer)
+    //then run mill check on their marble to make sure it isn't part of a mill itself
+    //if not, call EmptyCell to remove marble image and set playState to EMPTY
+    //set mill to false, and switch turns
     public void removeOpponent(Cell cell){
         if(getNextPlayer().myState == cell.playState){
             if(!checker.millCheck(cell)){
@@ -137,16 +146,20 @@ public class GameManager {
         }
     }
 
+    //function to place a marble in a given cell during STAGE1
+    //during stage 2, this function simply checks if a Player has picked up a marble to move it
     public boolean Place(Cell cell){
         Player current = getCurrentPlayer();
-        //stage 1
+
         switch (currentStage){
             case STAGE1:
+                //in STAGE1 if you still have marbles to place and you are clicking on a valid cell then place marble
                 if (current.remainingMarbles() && validMove(cell)) {
                     current.useMarble();
                     if (debug) {
                         System.out.println(current.name + " has " + current.getMarbles() + " remaining");
                     }
+                    //if no player has any more to place, switch to stage 2
                     if(!eitherPlayerHasMarbles()) {
                         currentStage = Stage.STAGE2;
                         if(debug){
@@ -156,6 +169,7 @@ public class GameManager {
                     return true;
                 }
                 break;
+
             case STAGE2:
                 if(current.hasHeldMarble()){
                     return true;

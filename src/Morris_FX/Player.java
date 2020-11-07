@@ -21,27 +21,35 @@ public class Player {
         return marbles;
     }
 
+    //decrease your starting marbles
+    //increase the count of marbles on the board
     public void useMarble(){
         marbles -=1;
         onBoard++;
     }
 
+    //decrease count of marbles on the board
     public void removeMarble(){
         onBoard--;
     }
 
+    //check if there are still marbles to be places for STAGE1
     public boolean remainingMarbles(){
         return marbles!=0;
     }
 
+    //this function holds in memory the state of the cell a Player picks a marble up from
+    //cell inPlay is the cell that Player is moving from
     public void holdMarble(Cell inPlay){
         this.inPlay = inPlay;
     }
 
+    //check if a Player is holding a marble
     public boolean hasHeldMarble(){
         return inPlay != null;
     }
 
+    //when a marble is placed out of the hand, return inPlay to null
     public void resetMarble(){
         inPlay = null;
     }
