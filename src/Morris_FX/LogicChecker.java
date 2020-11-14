@@ -69,7 +69,7 @@ public class LogicChecker {
     //this checks if a piece can be moved. Checks the cell you're picking the marble up from
     //if the cell above is empty, the move counter increases. checks up, down, left, right
     //if no valid moves, returns false and says no possible moves
-    public boolean moveCheck (Cell cell){
+    public boolean canChoose(Cell cell){
         int counter = 0;
         if(cell.up != null && cell.up.playState == Morris.State.EMPTY) {
             counter++;
@@ -97,12 +97,13 @@ public class LogicChecker {
     //first check if you're picking up a marble from a cell that has the same playState as the player (ex BLACK == BLACK)
     //AND call moveCheck to see if there are available moves to make
     public boolean canPickup(Cell cell, Player current){
-        if(cell.playState == current.myState && moveCheck(cell)){
+        if(cell.playState == current.myState && canChoose(cell)){
             if(!current.hasHeldMarble()){
                 return true;
             }
         }
         return false;
     }
+
 }
 

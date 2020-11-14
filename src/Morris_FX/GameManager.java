@@ -1,11 +1,12 @@
 package Morris_FX;
 
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 
 //GameManager controls the state of the board using logic checker
 public class GameManager {
 
-    public enum Stage {STAGE1,STAGE2,STAGE3}
+    public enum Stage {STAGE1,STAGE2,STAGE3, STAGE4}
 
     private boolean debug = false;
     public boolean mill = false;
@@ -146,47 +147,76 @@ public class GameManager {
         }
     }
 
-    //function to place a marble in a given cell during STAGE1
-    //during stage 2, this function simply checks if a Player has picked up a marble to move it
-    public boolean Place(Cell cell){
+    public void setCell(Cell cell){
+        Player current = getCurrentPlayer();
+        cell.setBackground(new Background(current.myMarble));
+        cell.playState = current.myState;
+    }
+
+    public boolean handle(Cell cell){
         Player current = getCurrentPlayer();
 
         switch (currentStage){
+
             case STAGE1:
-                //in STAGE1 if you still have marbles to place and you are clicking on a valid cell then place marble
                 if (current.remainingMarbles() && validMove(cell)) {
                     current.useMarble();
-                    if (debug) {
-                        System.out.println(current.name + " has " + current.getMarbles() + " remaining");
+                    setCell(cell);
+                    System.out.println(current.name + " has " + current.getMarbles() + " remaining");
+                    if(checker.millCheck(cell)){
+                        mill = true;
+                        System.out.println("Mill! \nPlease remove a piece");
+                        break;
                     }
-                    //if no player has any more to place, switch to stage 2
                     if(!eitherPlayerHasMarbles()) {
                         currentStage = Stage.STAGE2;
-                        if(debug){
-                            System.out.println("Switched stage");
-                        }
+                        System.out.println("Switched stage");
                     }
+                    switchTurn();
                     return true;
                 }
                 break;
 
             case STAGE2:
-                if(current.hasHeldMarble()){
-                    return true;
+                if (current.onBoard == 2){
+                    currentStage = Stage.STAGE4;
+                    break;
                 }
+                if(current.hasHeldMarble() && validMove(cell)) {
+                        setCell(cell);
+                        current.resetMarble();
+                        if (checker.millCheck(cell)) {
+                            mill = true;
+                            System.out.println("Mill!\nPlease remove a piece");
+                            break;
+                        }
+                        switchTurn();
+                }else if (canPickup(cell)) {
+                    holdMarble(cell);
+                    cell.EmptyCell();
+                    break;
+                }
+
+            case STAGE4:
+                //System.out.println(getCurrentPlayer() + "has won");
+                break;
+            default:
+                System.out.println("Uh, what?");
                 break;
         }
-        //Allowpickup
 
+        //Allowpickup
         return false;
     }
+
+
 
     public Stage getCurrentStage(){
         return currentStage;
     }
 
     //for AI use
-    public void Place(int x, int y){
+    public void handle(int x, int y){
 
     }
 
