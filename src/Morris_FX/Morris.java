@@ -56,9 +56,9 @@ public class Morris extends Application {
         choices.getChildren().addAll(again, openMenu, exit);
 
 //importing images!
-        Image woodBoard = new Image(new FileInputStream("./images/Morris_Board_Wood.png"),550,550,false,true);
-        Image blackMarble = new Image(new FileInputStream("./images/BlackMarble.png"), 40,40,false,true);
-        Image whiteMarble = new Image(new FileInputStream("./images/WhiteMarble.png"), 40,40,false,true);
+        Image woodBoard = new Image(new FileInputStream("./res/img/Morris_Board_Wood.png"),550,550,false,true);
+        Image blackMarble = new Image(new FileInputStream("./res/img/Black_Marble.png"), 40,40,false,true);
+        Image whiteMarble = new Image(new FileInputStream("./res/img/White_Marble.png"), 40,40,false,true);
         BackgroundImage emptyBoard = new BackgroundImage(woodBoard,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         BackgroundImage blackPiece = new BackgroundImage(blackMarble,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         BackgroundImage whitePiece = new BackgroundImage(whiteMarble,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
