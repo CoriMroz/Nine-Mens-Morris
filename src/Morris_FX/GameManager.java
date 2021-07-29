@@ -78,9 +78,11 @@ public class GameManager {
         return turnCounter;
     }
 
-    public void countTurn(){
-        if(turn)
+    public void countTurn() {
+        if (turn){
             turnCounter++;
+            //System.out.println("Turn " + getTurnCount());
+    }
     }
 
     public boolean getTurn(){
@@ -142,9 +144,21 @@ public class GameManager {
                 cell.EmptyCell();
                 getNextPlayer().removeMarble();
                 mill = false;
+
+                if(getNextPlayer().onBoard == 2){
+                    if(getCurrentPlayer() == player1)
+                        System.out.println("Player 1 has won");
+                    else
+                        System.out.println("Player 2 has won");
+                }
+
                 switchTurn();
             }
+            else
+                System.out.println("Not valid, please choose a different piece");
         }
+        else
+            System.out.println("Please choose the opponent's piece");
     }
 
     public void setCell(Cell cell){
@@ -155,8 +169,17 @@ public class GameManager {
 
     public boolean handle(Cell cell){
         Player current = getCurrentPlayer();
+        if (current == player1)
+            System.out.println("Turn " + (getTurnCount() + 1));
 
         switch (currentStage){
+
+            case STAGE4:
+                if(current == player2)
+                    System.out.println("Player 1 has won");
+                else
+                    System.out.println("Player 2 has won");
+                break;
 
             case STAGE1:
                 if (current.remainingMarbles() && validMove(cell)) {
@@ -178,10 +201,6 @@ public class GameManager {
                 break;
 
             case STAGE2:
-                if (current.onBoard == 2){
-                    currentStage = Stage.STAGE4;
-                    break;
-                }
                 if(current.hasHeldMarble() && validMove(cell)) {
                         setCell(cell);
                         current.resetMarble();
@@ -196,13 +215,11 @@ public class GameManager {
                     cell.EmptyCell();
                     break;
                 }
+                if (current.onBoard == 2){
+                    currentStage = Stage.STAGE4;
+                    break;
+                }
 
-            case STAGE4:
-                //System.out.println(getCurrentPlayer() + "has won");
-                break;
-            default:
-                System.out.println("Uh, what?");
-                break;
         }
 
         //Allowpickup
