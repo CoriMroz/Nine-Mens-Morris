@@ -2,10 +2,6 @@
 
 }
 
-#firstPane{
-    -fx-background-color: transparent;
-}
-
 #secondPane{
     -fx-background-color: transparent;
 }
@@ -34,11 +30,13 @@
 
 #topBar {
     -fx-background-color:  #32404a;
+    -fx-opacity: 0.4;
 }
 
-#firstTitle {
+/*#firstTitle {
      -fx-background-color:  #3C4E59;
 }
+*/
 
 #firstMenu {
      -fx-background-color:  #2F4959;
@@ -51,7 +49,14 @@
 .label{
     -fx-text-fill: #a3b4bf;
     -fx-font-family: "Abadi";
-    -fx-font-size: 70px;
+    -fx-font-size: 95px;
+    -fx-word-wrap: normal;
+
+}
+#smallTitle{
+    -fx-text-fill: #a3b4bf;
+    -fx-font-family: "Abadi";
+    -fx-font-size: 35px;
     -fx-word-wrap: normal;
 
 }
