@@ -66,14 +66,21 @@ public class Morris extends Application {
         twoMarbles.setLayoutX(270);
         twoMarbles.setLayoutY(270);
 
+        Image classicButton = new Image(new FileInputStream("./res/img/buttons/button11.png"), 225,100,false,true);
+        //BackgroundImage mainButton = new BackgroundImage(classicButton,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        ImageView mainButton = new ImageView(classicButton);
+        mainButton.setLayoutY(232);
+        mainButton.setLayoutX(7);
+
 //creating buttons
 
-        Button twoPlayer = new Button("    TWO\n PLAYERS");
-            //twoPlayer.setId("twoPlayer");
+        Button twoPlayer = new Button("    TWO PLAYERS");
+            twoPlayer.setId("twoPlayer");
             twoPlayer.setGraphic(twoPlayerIcon);
+            //twoPlayer.setBackground(new Background(mainButton));
             twoPlayer.setLayoutY(215);
-            twoPlayer.setLayoutX(25);
-//            twoPlayer.setMinSize(100,70);
+            twoPlayer.setLayoutX(22);
+            twoPlayer.setMinSize(200,57);
             twoPlayer.setOnAction(e -> {
                 primaryStage.setScene(scene3);
             });
@@ -174,7 +181,7 @@ public class Morris extends Application {
         morris.setLayoutX(185);
 
         firstTitle.getChildren().addAll(nine, mens, morris, Ai, twoPlayer, menu);
-        first.getChildren().addAll(topBar, firstTitle, twoMarbles);
+        first.getChildren().addAll(topBar, firstTitle, twoMarbles, mainButton);
 
 
         scene1 = new Scene(first, 600, 600);
