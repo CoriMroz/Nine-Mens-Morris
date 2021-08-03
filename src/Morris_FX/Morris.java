@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -66,12 +67,13 @@ public class Morris extends Application {
         twoMarbles.setLayoutY(270);
 
 //creating buttons
+
         Button twoPlayer = new Button("    TWO\n PLAYERS");
-            twoPlayer.setId("twoPlayer");
+            //twoPlayer.setId("twoPlayer");
             twoPlayer.setGraphic(twoPlayerIcon);
             twoPlayer.setLayoutY(215);
             twoPlayer.setLayoutX(25);
-            twoPlayer.setMinSize(100,70);
+//            twoPlayer.setMinSize(100,70);
             twoPlayer.setOnAction(e -> {
                 primaryStage.setScene(scene3);
             });
@@ -79,7 +81,7 @@ public class Morris extends Application {
             Ai.setGraphic(onePlayerIcon);
             Ai.setLayoutY(315);
             Ai.setLayoutX(25);
-            Ai.setMinSize(100,70);
+//            Ai.setMinSize(100,70);
             Ai.setOnAction(e -> {
                 //gameManager.setPlayerVersusComputer();
                 primaryStage.setScene(scene3);
@@ -88,7 +90,7 @@ public class Morris extends Application {
             menu.setGraphic(gearIcon);
             menu.setLayoutY(415);
             menu.setLayoutX(25);
-            menu.setMinSize(100,70);
+//            menu.setMinSize(100,70);
             menu.setOnAction(e -> {
                 primaryStage.setScene(scene2);
             });
