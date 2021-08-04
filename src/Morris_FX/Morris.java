@@ -81,7 +81,6 @@ public class Morris extends Application {
 //creating buttons
 
         Button twoPlayer = new Button("    TWO PLAYERS");
-            twoPlayer.setId("twoPlayer");
             twoPlayer.setGraphic(twoPlayerIcon);
             twoPlayer.setLayoutY(205);
             twoPlayer.setLayoutX(22);
@@ -108,9 +107,8 @@ public class Morris extends Application {
             });
         Button exit = new Button("X");
             exit.setId("X");
-            exit.setMinSize(25, 25);
-            //exit.setLayoutY(15);
-            exit.setLayoutX(520);
+            exit.setMinSize(25, 36);
+            exit.setLayoutX(565);
             exit.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent actionEvent){
@@ -121,11 +119,10 @@ public class Morris extends Application {
             minimize.setId("minimize");
             minimize.setMinSize(25,30);
 
-            minimize.setLayoutX(490);
+            minimize.setLayoutX(530);
             minimize.setOnAction(e -> {
                 ((Stage)((Button)e.getSource()).getScene().getWindow()).setIconified(true);
             });
-
 
 
 //creating a box for scene3 (game scene) to include the 3 above buttons
@@ -144,6 +141,7 @@ public class Morris extends Application {
 //setting the pane for game in the window
         BorderPane gameWindow = new BorderPane();
         gameWindow.setBottom(choices);
+        gameWindow.setBackground(new Background(appBackground));
 
         Pane boardPane = new Pane(board);
         board.setPadding(new Insets((20), 10, 10, 20));
@@ -214,6 +212,19 @@ public class Morris extends Application {
 
 
 //scene 3
+        Pane gameTopBar = new Pane();
+        gameTopBar.setId("topBar");
+        gameTopBar.setMinSize(600, 30);
+
+        gameTopBar.setOnMousePressed(pressEvent -> {
+            gameTopBar.setOnMouseDragged(dragEvent -> {
+                primaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+                primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+            });
+        });
+        gameTopBar.getChildren().addAll( minimize, exit);
+        gameWindow.setTop(gameTopBar);
+
         Label label3 = new Label("Game");
         again.setOnAction(e -> manager.resetBoard());
         scene3 = new Scene(gameWindow, 600, 600);
