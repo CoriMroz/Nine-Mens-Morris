@@ -2,6 +2,7 @@ package Morris_FX;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -124,10 +125,28 @@ public class Morris extends Application {
                 ((Stage)((Button)e.getSource()).getScene().getWindow()).setIconified(true);
             });
 
+        Button gameExit = new Button("X");
+        gameExit.setId("X");
+        gameExit.setMinSize(25, 36);
+        gameExit.setLayoutX(565);
+        gameExit.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent actionEvent){
+                Platform.exit();
+            }
+        });
+        Button gameMinimize = new Button("-");
+        gameMinimize.setId("minimize");
+        gameMinimize.setMinSize(25,30);
+
+        gameMinimize.setLayoutX(530);
+        gameMinimize.setOnAction(e -> {
+            ((Stage)((Button)e.getSource()).getScene().getWindow()).setIconified(true);
+        });
 
 //creating a box for scene3 (game scene) to include the 3 above buttons
         HBox choices = new HBox();
-        choices.getChildren().addAll(again, openMenu, exit);
+        //choices.getChildren().addAll(again, openMenu, exit);
 
 //set a new gameManager
         GameManager manager = new GameManager(false,whitePiece,blackPiece);
@@ -136,7 +155,6 @@ public class Morris extends Application {
         GridPane board = manager.getBoard().toGridPane();
         manager.resetBoard();
         manager.linkCells();
-
 
 //setting the pane for game in the window
         BorderPane gameWindow = new BorderPane();
@@ -212,6 +230,9 @@ public class Morris extends Application {
 
 
 //scene 3
+        Pane gameTopArea = new Pane();
+        gameTopArea.setMinSize(600, 100);
+
         Pane gameTopBar = new Pane();
         gameTopBar.setId("topBar");
         gameTopBar.setMinSize(600, 30);
@@ -222,8 +243,13 @@ public class Morris extends Application {
                 primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
             });
         });
-        gameTopBar.getChildren().addAll( minimize, exit);
-        gameWindow.setTop(gameTopBar);
+
+        manager.turnMessage.setLayoutX(200);
+        manager.turnMessage.setLayoutY(50);
+
+        gameTopBar.getChildren().addAll( gameMinimize, gameExit);
+        gameTopArea.getChildren().addAll(gameTopBar, manager.turnMessage);
+        gameWindow.setTop(gameTopArea);
 
         Label label3 = new Label("Game");
         again.setOnAction(e -> manager.resetBoard());

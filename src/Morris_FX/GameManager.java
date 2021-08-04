@@ -2,6 +2,8 @@ package Morris_FX;
 
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
+import javafx.scene.text.Text;
+
 
 //GameManager controls the state of the board using logic checker
 public class GameManager {
@@ -18,6 +20,7 @@ public class GameManager {
     Player player1;
     Player player2;
     int turnCounter = 0;
+    public Text turnMessage = new Text("Turn 1"  + "\n PLAYER 1 MAY MOVE");
 
     Stage currentStage = Stage.STAGE1;
 
@@ -169,8 +172,13 @@ public class GameManager {
 
     public boolean handle(Cell cell){
         Player current = getCurrentPlayer();
-        if (current == player1)
+        if (current == player1) {
             System.out.println("Turn " + (getTurnCount() + 1));
+            turnMessage.setText("Turn " + (getTurnCount() + 1) + "\n PLAYER 2 MAY MOVE");
+        }
+        else{
+            turnMessage.setText("Turn " + (getTurnCount() + 1) + "\n PLAYER 1 MAY MOVE");
+        }
 
         switch (currentStage){
 
