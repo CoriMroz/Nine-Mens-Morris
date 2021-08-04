@@ -63,7 +63,7 @@ public class Morris extends Application {
         ImageView twoPlayerIcon = new ImageView(two);
         Image marbles = new Image(new FileInputStream("./res/img/2Marbles.png"), 230,230,false, true);
         ImageView twoMarbles = new ImageView(marbles);
-        twoMarbles.setLayoutX(270);
+        twoMarbles.setLayoutX(285);
         twoMarbles.setLayoutY(270);
 
         Image classicButton = new Image(new FileInputStream("./res/img/buttons/button11.png"), 225,100,false,true);
@@ -89,7 +89,7 @@ public class Morris extends Application {
             twoPlayer.setOnAction(e -> {
                 primaryStage.setScene(scene3);
             });
-        Button Ai = new Button("SINGLE \nPLAYER");
+        Button Ai = new Button("SINGLE PLAYER");
             Ai.setGraphic(onePlayerIcon);
             Ai.setLayoutY(315);
             Ai.setLayoutX(22);
