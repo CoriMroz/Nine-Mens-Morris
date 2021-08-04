@@ -67,18 +67,23 @@ public class Morris extends Application {
         twoMarbles.setLayoutY(270);
 
         Image classicButton = new Image(new FileInputStream("./res/img/buttons/button11.png"), 225,100,false,true);
-        //BackgroundImage mainButton = new BackgroundImage(classicButton,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        ImageView mainButton = new ImageView(classicButton);
-        mainButton.setLayoutY(232);
-        mainButton.setLayoutX(7);
+        //BackgroundImage firstButton = new BackgroundImage(classicButton,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        ImageView firstButton = new ImageView(classicButton);
+        firstButton.setLayoutY(222);
+        firstButton.setLayoutX(7);
+        ImageView secondButton = new ImageView(classicButton);
+        secondButton.setLayoutY(332);
+        secondButton.setLayoutX(7);
+        ImageView thirdButton = new ImageView(classicButton);
+        thirdButton.setLayoutY(442);
+        thirdButton.setLayoutX(7);
 
 //creating buttons
 
         Button twoPlayer = new Button("    TWO PLAYERS");
             twoPlayer.setId("twoPlayer");
             twoPlayer.setGraphic(twoPlayerIcon);
-            //twoPlayer.setBackground(new Background(mainButton));
-            twoPlayer.setLayoutY(215);
+            twoPlayer.setLayoutY(205);
             twoPlayer.setLayoutX(22);
             twoPlayer.setMinSize(200,57);
             twoPlayer.setOnAction(e -> {
@@ -87,17 +92,17 @@ public class Morris extends Application {
         Button Ai = new Button("SINGLE \nPLAYER");
             Ai.setGraphic(onePlayerIcon);
             Ai.setLayoutY(315);
-            Ai.setLayoutX(25);
-//            Ai.setMinSize(100,70);
+            Ai.setLayoutX(22);
+            Ai.setMinSize(200,57);
             Ai.setOnAction(e -> {
                 //gameManager.setPlayerVersusComputer();
                 primaryStage.setScene(scene3);
             });
         Button menu = new Button();
             menu.setGraphic(gearIcon);
-            menu.setLayoutY(415);
-            menu.setLayoutX(25);
-//            menu.setMinSize(100,70);
+            menu.setLayoutY(425);
+            menu.setLayoutX(22);
+            menu.setMinSize(200,57);
             menu.setOnAction(e -> {
                 primaryStage.setScene(scene2);
             });
@@ -181,7 +186,7 @@ public class Morris extends Application {
         morris.setLayoutX(185);
 
         firstTitle.getChildren().addAll(nine, mens, morris, Ai, twoPlayer, menu);
-        first.getChildren().addAll(topBar, firstTitle, twoMarbles, mainButton);
+        first.getChildren().addAll(topBar, firstTitle, twoMarbles, firstButton, secondButton, thirdButton);
 
 
         scene1 = new Scene(first, 600, 600);
