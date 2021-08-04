@@ -6,7 +6,17 @@
     -fx-background-color: transparent;
 }
 
+#turnMessage {
+    -fx-shape: 'M 592 300 L 650 240 L 650 150 L 240 150 L 200 200 L 200 300 Z';
+    -fx-background-color:  #3d464d;
+    -fx-opacity: 0.85;
+    -fx-font-family: "Abadi";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #a3b4bf;
+    -fx-text-align: center;
 
+}
 
 .button {
     -fx-shape: 'M 592 300 L 650 240 L 650 150 L 240 150 L 200 200 L 200 300 Z';

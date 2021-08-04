@@ -84,7 +84,6 @@ public class GameManager {
     public void countTurn() {
         if (turn){
             turnCounter++;
-            //System.out.println("Turn " + getTurnCount());
     }
     }
 
@@ -96,7 +95,6 @@ public class GameManager {
         countTurn();
         turn =!turn;
         if(debug){
-            //System.out.println("Turn " + getTurnCount());
         }
     }
 

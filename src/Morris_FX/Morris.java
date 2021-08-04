@@ -10,6 +10,7 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -78,6 +79,11 @@ public class Morris extends Application {
         ImageView thirdButton = new ImageView(classicButton);
         thirdButton.setLayoutY(442);
         thirdButton.setLayoutX(7);
+
+        Image textButton = new Image(new FileInputStream("./res/img/buttons/button4.png"), 225,100,false,true);
+        ImageView turnMessageButton = new ImageView(textButton);
+        turnMessageButton.setLayoutY(35);
+        turnMessageButton.setLayoutX(175);
 
 //creating buttons
 
@@ -244,16 +250,19 @@ public class Morris extends Application {
             });
         });
 
-        manager.turnMessage.setLayoutX(200);
-        manager.turnMessage.setLayoutY(50);
+        manager.turnMessage.setTextAlignment(TextAlignment.CENTER);
+        manager.turnMessage.setLayoutX(210);
+        manager.turnMessage.setLayoutY(75);
+        manager.turnMessage.setId("turnMessage");
 
         gameTopBar.getChildren().addAll( gameMinimize, gameExit);
-        gameTopArea.getChildren().addAll(gameTopBar, manager.turnMessage);
+        gameTopArea.getChildren().addAll(gameTopBar, turnMessageButton, manager.turnMessage);
         gameWindow.setTop(gameTopArea);
 
         Label label3 = new Label("Game");
         again.setOnAction(e -> manager.resetBoard());
         scene3 = new Scene(gameWindow, 600, 600);
+        scene3.getStylesheets().add(Morris.class.getResource("StageDesign.css").toExternalForm());
 
 
         primaryStage.setScene(scene1);
