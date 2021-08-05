@@ -57,6 +57,9 @@ public class Morris extends Application {
         Image background = new Image(new FileInputStream("./res/img/background2.jpg"),600,600,false,true);
         BackgroundImage appBackground = new BackgroundImage(background,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 
+        Image background2 = new Image(new FileInputStream("./res/img/background2.jpg"),700,700,false,true);
+        BackgroundImage gameBackground = new BackgroundImage(background2,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+
         Image gear = new Image(new FileInputStream("./res/img/gear_Icon.png"), 35,35,false,true);
         ImageView gearIcon = new ImageView(gear);
         Image one = new Image(new FileInputStream("./res/img/1P_Icon.png"), 35,35,false,true);
@@ -83,7 +86,7 @@ public class Morris extends Application {
         Image textButton = new Image(new FileInputStream("./res/img/buttons/button4.png"), 225,100,false,true);
         ImageView turnMessageButton = new ImageView(textButton);
         turnMessageButton.setLayoutY(35);
-        turnMessageButton.setLayoutX(175);
+        turnMessageButton.setLayoutX(240);
 
 //creating buttons
 
@@ -134,7 +137,7 @@ public class Morris extends Application {
         Button gameExit = new Button("X");
         gameExit.setId("X");
         gameExit.setMinSize(25, 36);
-        gameExit.setLayoutX(565);
+        gameExit.setLayoutX(665);
         gameExit.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent actionEvent){
@@ -145,7 +148,7 @@ public class Morris extends Application {
         gameMinimize.setId("minimize");
         gameMinimize.setMinSize(25,30);
 
-        gameMinimize.setLayoutX(530);
+        gameMinimize.setLayoutX(630);
         gameMinimize.setOnAction(e -> {
             ((Stage)((Button)e.getSource()).getScene().getWindow()).setIconified(true);
         });
@@ -165,13 +168,16 @@ public class Morris extends Application {
 //setting the pane for game in the window
         BorderPane gameWindow = new BorderPane();
         gameWindow.setBottom(choices);
-        gameWindow.setBackground(new Background(appBackground));
+        gameWindow.setBackground(new Background(gameBackground));
 
         Pane boardPane = new Pane(board);
         board.setPadding(new Insets((20), 10, 10, 20));
         boardPane.setBackground(new Background(emptyBoard));
-
         gameWindow.setCenter(boardPane);
+
+        Pane leftPane = new Pane();
+        leftPane.setMinSize(75,700);
+        gameWindow.setLeft(leftPane);
 
 //Scene 1
         Pane first = new Pane();
@@ -237,11 +243,11 @@ public class Morris extends Application {
 
 //scene 3
         Pane gameTopArea = new Pane();
-        gameTopArea.setMinSize(600, 100);
+        gameTopArea.setMinSize(700, 100);
 
         Pane gameTopBar = new Pane();
         gameTopBar.setId("topBar");
-        gameTopBar.setMinSize(600, 30);
+        gameTopBar.setMinSize(700, 30);
 
         gameTopBar.setOnMousePressed(pressEvent -> {
             gameTopBar.setOnMouseDragged(dragEvent -> {
@@ -251,7 +257,7 @@ public class Morris extends Application {
         });
 
         manager.turnMessage.setTextAlignment(TextAlignment.CENTER);
-        manager.turnMessage.setLayoutX(210);
+        manager.turnMessage.setLayoutX(275);
         manager.turnMessage.setLayoutY(75);
         manager.turnMessage.setId("turnMessage");
 
@@ -261,7 +267,7 @@ public class Morris extends Application {
 
         Label label3 = new Label("Game");
         again.setOnAction(e -> manager.resetBoard());
-        scene3 = new Scene(gameWindow, 600, 600);
+        scene3 = new Scene(gameWindow, 700, 700);
         scene3.getStylesheets().add(Morris.class.getResource("StageDesign.css").toExternalForm());
 
 
